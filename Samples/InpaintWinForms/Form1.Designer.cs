@@ -33,6 +33,8 @@
             this.btnInpaint = new System.Windows.Forms.Button();
             this.pbMarkup = new Zavolokas.WinFormsHelpers.MarkablePictureBox();
             this.btnOpenMarkup = new System.Windows.Forms.Button();
+            this.saveBtn = new System.Windows.Forms.Button();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.SuspendLayout();
             // 
             // btnOpen
@@ -89,11 +91,23 @@
             this.btnOpenMarkup.UseVisualStyleBackColor = true;
             this.btnOpenMarkup.Click += new System.EventHandler(this.OnOpenMarkupClick);
             // 
+            // saveBtn
+            // 
+            this.saveBtn.Enabled = false;
+            this.saveBtn.Location = new System.Drawing.Point(523, 99);
+            this.saveBtn.Name = "saveBtn";
+            this.saveBtn.Size = new System.Drawing.Size(117, 23);
+            this.saveBtn.TabIndex = 2;
+            this.saveBtn.Text = "Save File";
+            this.saveBtn.UseVisualStyleBackColor = true;
+            this.saveBtn.Click += new System.EventHandler(this.OnSaveFileClick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(647, 461);
+            this.Controls.Add(this.saveBtn);
             this.Controls.Add(this.btnInpaint);
             this.Controls.Add(this.btnOpenMarkup);
             this.Controls.Add(this.btnOpen);
@@ -111,6 +125,8 @@
         private Zavolokas.WinFormsHelpers.MarkablePictureBox pbMarkup;
         private System.Windows.Forms.Button btnInpaint;
         private System.Windows.Forms.Button btnOpenMarkup;
+        private System.Windows.Forms.Button saveBtn;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }
 }
 

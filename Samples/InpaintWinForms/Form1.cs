@@ -24,6 +24,7 @@ namespace InpaintWinForms
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 pbMarkup.Image = new Bitmap(openFileDialog1.FileName);
+                saveFileDialog1.FileName = openFileDialog1.SafeFileName;
                 btnInpaint.Enabled = true;
             }
         }
@@ -31,6 +32,7 @@ namespace InpaintWinForms
         private async void OnInpaint(object s, EventArgs e)
         {
             btnInpaint.Enabled = false;
+            saveBtn.Enabled = false;
             var imageArgb = ConvertToArgbImage((Bitmap)pbMarkup.Image);
             var markupArgb = ConvertToArgbImage((Bitmap)pbMarkup.RemoveMarkup);
 
@@ -54,6 +56,11 @@ namespace InpaintWinForms
                     pbMarkup.Image = eventArgs.InpaintedLabImage
                         .FromLabToRgb()
                         .FromRgbToBitmap();
+
+                    if (eventArgs.InpaintIteration == 0)
+                    {
+                        saveBtn.Invoke(new Action(() => saveBtn.Enabled = true));
+                    }
                 };
 
                 await Task.Factory.StartNew(() => inpainter.Inpaint(imageArgb, markupArgb, settings));
@@ -88,6 +95,14 @@ namespace InpaintWinForms
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 pbMarkup.RemoveMarkup = new Bitmap(openFileDialog1.FileName);
+            }
+        }
+
+        private void OnSaveFileClick(object sender, EventArgs e)
+        {
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                pbMarkup.Image.Save(saveFileDialog1.FileName);
             }
         }
     }
